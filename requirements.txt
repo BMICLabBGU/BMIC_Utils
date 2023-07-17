@@ -1,0 +1,6 @@
+easydict==1.10
+nibabel==5.1.0
+numpy==1.21.5
+PyYAML==6.0
+scikit_image==0.19.2
+tqdm==4.64.0
