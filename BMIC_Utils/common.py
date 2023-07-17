@@ -2,6 +2,7 @@ import nibabel as nib
 import numpy as np
 import yaml
 from easydict import EasyDict
+import os
 
 
 def autoArgs(args,c_obj:object):
@@ -9,9 +10,3 @@ def autoArgs(args,c_obj:object):
     args_keys = list(set(func_args_keys).intersection(args.keys()))
     
     return c_obj(**{x:args[x] for x in args_keys})
-
-def yaml2Obj(yml_path:str):
-    with open(yml_path,'r') as fd:
-        yml_obj = EasyDict(yaml.safe_load(fd))
-        
-    return yml_obj

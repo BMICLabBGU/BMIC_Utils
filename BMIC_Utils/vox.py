@@ -2,7 +2,7 @@ import numpy as np
 import os
 from tqdm import tqdm
 from skimage.segmentation import slic
-import nibable as nig
+import nibabel as nib
 
 
 def loadNII(nii_path, with_affine=True):
