@@ -1,13 +1,17 @@
+from typing import Tuple
 import pandas as pd
 import numpy as np
-from types import Tuple
 
 
 def get_mri_indices(mri) -> Tuple[int, int, int]:
-    """get (x,y,z) indices of best channels to visualize given MRI image
-
-    :param mri: 3D MRI scan
-    :return:
+    """
+    Takes a 3D MRI scan as input and returns the (x, y, z) indices of the
+    best channels to visualize in the scan.
+    
+    :param mri: A 3D MRI scan, which is a 3-dimensional array representing the 
+                image data of the MRI scan
+    :return: A tuple of three integers, which represent the x, y, and z indices 
+                of the best channels to visualize in the given MRI image.
     """
     nz_indices = mri.nonzero()
     df = pd.DataFrame(np.array(nz_indices).T, columns=['x', 'y', 'z'])
