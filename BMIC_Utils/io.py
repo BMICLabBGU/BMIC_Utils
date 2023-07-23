@@ -16,7 +16,7 @@ def pickle_read(file_path: str):
         return pickle.load(file)
 
 
-def pickle_write(obj, file_path: str):
+def pickle_write(obj: dict, file_path: str):
     """
     Serializes an object and saves it as a pickle file.
     
@@ -50,7 +50,7 @@ def json_read(path: str, easy_dict: bool = True):
     return obj
 
 
-def json_write(obj, path: str, **kwargs):
+def json_write(obj:dict, path: str, **kwargs):
     """
     Writes a Python object to a JSON file with specified formatting options.
     
@@ -87,7 +87,7 @@ def yaml_read(path: str, unsafe_load: bool = False, easy_dict: bool = True):
     return obj
 
 
-def yaml_write(obj, path: str):
+def yaml_write(obj:dict, path: str):
     """
     Writes a Python object to a YAML file with specified formatting options.
     

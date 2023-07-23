@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-def get_mri_indices(mri) -> Tuple[int, int, int]:
+def get_mri_indices(mri:np.ndarray) -> Tuple[int, int, int]:
     """
     Takes a 3D MRI scan as input and returns the (x, y, z) indices of the
     best channels to visualize in the scan.

@@ -5,7 +5,7 @@ from skimage.segmentation import slic
 import nibabel as nib
 
 
-def load_NII(nii_path, with_affine=True):
+def load_NII(nii_path:str, with_affine=True):
     """
     The function `load_NII` loads a NIfTI image file and returns the image data as a NumPy array, along
     with the affine transformation matrix if specified.
@@ -38,10 +38,9 @@ def save_NII(nii_path,voxel, affine=np.eye(4)):
         nii_path+='.nii.gz'
     nib.save(nib_obj, nii_path)
     
-
-def get_3d_seg(scan: np.ndarray, n_seg: int = 500, sigma=0, compactness=0.01, limits=None) -> np.ndarray:
+def super_pixel_seg(scan: np.ndarray, n_seg: int = 500, sigma=0, compactness=0.01, limits=None) -> np.ndarray:
     """
-    The function `get3dSeg` takes in a 3D scan as input and applies the SLIC (Simple Linear Iterative
+    The function takes in a 3D scan as input and applies the SLIC (Simple Linear Iterative
     Clustering) algorithm to segment the scan into a specified number of segments.
     
     :param scan: A 3D array representing the input scan data. 
@@ -72,3 +71,9 @@ def get_3d_seg(scan: np.ndarray, n_seg: int = 500, sigma=0, compactness=0.01, li
                     slic_zero=True
                     )
     return segments
+    
+def get_3d_seg(scan: np.ndarray, n_seg: int = 500, sigma=0, compactness=0.01, limits=None) -> np.ndarray:
+    from warnings import warn
+    warn("The 'get_3d_seg' class was renamed 'super_pixel_seg' and will be deprecated in future versions",
+                  DeprecationWarning )
+    return super_pixel_seg(scan, n_seg, sigma, compactness, limits)
