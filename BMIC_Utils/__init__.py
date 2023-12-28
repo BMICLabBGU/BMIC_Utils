@@ -19,6 +19,7 @@ from . import common
 from . import io
 from . import vox
 from . import vis
+from . import metrics
 
 # object imports
 from .common import autoArgs

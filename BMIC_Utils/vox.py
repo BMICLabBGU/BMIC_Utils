@@ -3,6 +3,7 @@ import os
 from tqdm import tqdm
 from skimage.segmentation import slic
 import nibabel as nib
+from plyfile import PlyData, PlyElement
 
 
 def load_NII(nii_path:str, with_affine=True):
@@ -16,6 +17,9 @@ def load_NII(nii_path:str, with_affine=True):
     :return: the NIfTI image array and, if with_affine is set to True, it also returns the affine
     transformation matrix.
     """
+    if not nii_path.endswith('.nii.gz'):
+        nii_path+='.nii.gz'
+        
     nii_image = nib.load(nii_path)
     nii_array = nii_image.get_fdata()
     if with_affine:
@@ -77,3 +81,32 @@ def get_3d_seg(scan: np.ndarray, n_seg: int = 500, sigma=0, compactness=0.01, li
     warn("The 'get_3d_seg' class was renamed 'super_pixel_seg' and will be deprecated in future versions",
                   DeprecationWarning )
     return super_pixel_seg(scan, n_seg, sigma, compactness, limits)
+
+
+def np2ply(save_path:str, voxel_data:np.ndarray)->None:
+    """
+    Converts voxel data into a PLY file format and saves it to the specified path.
+    
+    :param save_path: The `save_path` parameter is a string that specifies the path and filename where
+    the PLY file will be saved
+    :type save_path: str
+    :param voxel_data: A NumPy array containing voxel data.
+    Voxel data is typically represented as a 3D array where each element represents a voxel in 3D space.
+    The values in the array indicate the presence or absence of a voxel at that position
+    :type voxel_data: np.ndarray
+    """
+    threshold=0
+    ys,xs,zs = np.where(voxel_data > threshold)
+    points = np.array(
+        [(y,x,z) for y,x,z in zip(ys,xs,zs)],
+        dtype=[('x', 'f4'), ('y', 'f4'),('z', 'f4')])
+    # Create PLY element for vertices
+    ply_vertices = PlyElement.describe(
+        points,
+        'vertex')
+    # Create PLY data object
+    ply_data = PlyData([ply_vertices])
+
+    # Save the PLY data to a file
+    save_path += "" if save_path.endswith('.ply') else '.ply'
+    ply_data.write(save_path)
