@@ -1,7 +1,0 @@
-easydict
-nibabel
-numpy>=1.20
-PyYAML==6.0
-scikit_image
-tqdm
-plyfile>=1.0.1

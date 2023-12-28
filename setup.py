@@ -47,7 +47,7 @@ except:
 version = "0.1b0"
 setup(
     # Project name: 
-    name='BMIU',
+    name='BMIC_Utils',
     # Packages to include in the distribution: 
     packages=find_packages(','),
     # Project version number:
