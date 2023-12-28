@@ -1,4 +1,6 @@
 __pycache__
-dist/*
+**/dist/*
 *.egg-info/*
+**.py.swp
+**.egg*/
 main.py
